@@ -1,32 +1,41 @@
+﻿
 [![university](https://img.shields.io/badge/university-Brno%20University%20of%20Technology-red.svg)](https://www.vutbr.cz/en/)
 [![faculty](https://img.shields.io/badge/faculty-Faculty%20of%20Electrical%20Engineering%20and%20Communication-blue.svg)](https://www.fekt.vutbr.cz/)
 
-# Digital electronics
+
+# AVR Template
 
 #### Table of Contents
 
 1. [Introduction](#introduction)
 2. [Hardware Components](#hardware-components)
 3. [How to Use AVR Template on Linux](docs/HOWTO_linux.md)
-4. [References](#references)
+4. [How to Use AVR Template on Windows](docs/HOWTO_windows.md)
+5. [How to Use AVR Template on Mac OS X](docs/HOWTO_mac.md)
+6. [References](#references)
 
 
 ## Introduction
 
-The repository contains AVR template for bachelor course *Digital Electronics 2* ([Winter 2019/2020](https://www.vutbr.cz/en/students/courses/detail/210896)) at Brno University of Technology, Czechia.
+The repository contains AVR template for bachelor course *Digital Electronics 2* ([Winter 2019/2020](https://www.vutbr.cz/en/students/courses/detail/210896)) at Brno University of Technology, Czechia. The repository has the following hierarchy:
 
 ```bash
+avr-template$ tree
 .
 ├── docs
-│   └── hw
+│   └── hw
 ├── LICENSE
 ├── projects
-│   ├── 01-demo
-│   ├── 09-asm_random
-│   ├── library
-│   │   ├── inc
-│   │   └── src
-│   └── projects.in
+│   ├── 01-demo
+│   │   ├── main.c
+│   │   ├── Makefile
+│   │   └── README.md
+│   ├── 09-asm_random
+│   │   └── rand.S
+│   ├── library
+│   │   ├── inc
+│   │   └── src
+│   └── projects.in
 └── README.md
 ```
 
@@ -60,8 +69,23 @@ The following hardware components are mainly used in the lab.
 4. [AVRDUDE, software for programming Atmel AVR Microcontrollers](http://savannah.nongnu.org/projects/avrdude/)
 5. Microchip, [AVR 8-bit Toolchain for Windows, Linux, Mac OS X](https://www.microchip.com/mplab/avr-support/avr-and-arm-toolchains-c-compilers)
 6. [Atom text editor](https://atom.io/)
-7. [Visual Studio Code](https://code.visualstudio.com/)
-8. [Doxygen, a standard tool for generating documentation from annotated source files](http://doxygen.nl/)
-9. [Graphviz, open source graph visualization software](http://graphviz.org/)
-10. Peter Fleury, [AVR-GCC libraries](http://homepage.hispeed.ch/peterfleury/avr-software.html)
-11. Wykys, [Tools for development of AVR microcontrollers](https://github.com/wykys/AVR-tools)
+7. [Doxygen, a standard tool for generating documentation from annotated source files](http://doxygen.nl/)
+8. [Graphviz, open source graph visualization software](http://graphviz.org/)
+9. Peter Fleury, [AVR-GCC libraries](http://homepage.hispeed.ch/peterfleury/avr-software.html)
+10. Wykys, [Tools for development of AVR microcontrollers](https://github.com/wykys/AVR-tools)
+
+
+## Tested on Operating Systems
+
+**Name**   | **Version**                | **Result**      | **Note**
+---------- | -------------------------- | --------------- | --------
+Linux Mint | 18.3, Sylvia               | OK (2019-06-13) | Laptop
+Windows    | Windows 7                  | OK (2019-05-17) | Lab
+Linux Mint | 18.2, Sonya                | OK (2019-05-17) | Lab
+Ubuntu     | 18.04.1 LTS, Bionic Beaver | OK (2019-05-15) | Office
+Ubuntu     | 16.04, Xenial Xerus        | OK (2018-09-15) | Office
+
+```bash
+# FYI: How to check OS version in Linux
+cat /etc/os-release
+```
