@@ -20,6 +20,7 @@ Linker script and memory map
 Address of section .data set to 0x800100
 LOAD /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/crtatmega328p.o
 LOAD main.o
+LOAD GPIO.o
 START GROUP
 LOAD /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/avr5/libgcc.a
 LOAD /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/libm.a
@@ -124,7 +125,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x0000000000000000       0xb8
+.text           0x0000000000000000      0x18e
  *(.vectors)
  .vectors       0x0000000000000000       0x68 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/crtatmega328p.o
                 0x0000000000000000                __vectors
@@ -206,29 +207,36 @@ END GROUP
                 0x000000000000007c                __vector_18
                 0x000000000000007c                __vector_20
  .text          0x0000000000000080        0x0 main.o
- .text          0x0000000000000080        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
-                0x0000000000000080                . = ALIGN (0x2)
+ .text          0x0000000000000080       0x9e GPIO.o
+                0x0000000000000080                GPIO_config_output
+                0x0000000000000096                GPIO_config_input_nopull
+                0x00000000000000b4                GPIO_config_input_pullup
+                0x00000000000000d4                GPIO_write
+                0x00000000000000f4                GPIO_toggle
+                0x000000000000010a                GPIO_read
+ .text          0x000000000000011e        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
+                0x000000000000011e                . = ALIGN (0x2)
  *(.text.*)
- .text.startup  0x0000000000000080       0x34 main.o
-                0x0000000000000080                main
+ .text.startup  0x000000000000011e       0x6c main.o
+                0x000000000000011e                main
  .text.libgcc.mul
-                0x00000000000000b4        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
+                0x000000000000018a        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
  .text.libgcc.div
-                0x00000000000000b4        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
- .text.libgcc   0x00000000000000b4        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
+                0x000000000000018a        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
+ .text.libgcc   0x000000000000018a        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
  .text.libgcc.prologue
-                0x00000000000000b4        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
+                0x000000000000018a        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
  .text.libgcc.builtins
-                0x00000000000000b4        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
+                0x000000000000018a        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
  .text.libgcc.fmul
-                0x00000000000000b4        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
+                0x000000000000018a        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
  .text.libgcc.fixed
-                0x00000000000000b4        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
-                0x00000000000000b4                . = ALIGN (0x2)
+                0x000000000000018a        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
+                0x000000000000018a                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000000000000b4        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
-                0x00000000000000b4                exit
-                0x00000000000000b4                _exit
+ .fini9         0x000000000000018a        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
+                0x000000000000018a                exit
+                0x000000000000018a                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -247,15 +255,16 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000000000000b4        0x4 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
+ .fini0         0x000000000000018a        0x4 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
  *(.fini0)
-                0x00000000000000b8                _etext = .
+                0x000000000000018e                _etext = .
 
-.data           0x0000000000800100        0x0 load address 0x00000000000000b8
+.data           0x0000000000800100        0x0 load address 0x000000000000018e
                 [!provide]                        PROVIDE (__data_start, .)
  *(.data)
  .data          0x0000000000800100        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/crtatmega328p.o
  .data          0x0000000000800100        0x0 main.o
+ .data          0x0000000000800100        0x0 GPIO.o
  .data          0x0000000000800100        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
  *(.data*)
  *(.gnu.linkonce.d*)
@@ -271,12 +280,13 @@ END GROUP
  *(.bss)
  .bss           0x0000000000800100        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/crtatmega328p.o
  .bss           0x0000000000800100        0x0 main.o
+ .bss           0x0000000000800100        0x0 GPIO.o
  .bss           0x0000000000800100        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/avr5/libgcc.a(_exit.o)
  *(.bss*)
  *(COMMON)
                 [!provide]                        PROVIDE (__bss_end, .)
-                0x00000000000000b8                __data_load_start = LOADADDR (.data)
-                0x00000000000000b8                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x000000000000018e                __data_load_start = LOADADDR (.data)
+                0x000000000000018e                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x0000000000800100        0x0
                 [!provide]                        PROVIDE (__noinit_start, .)
@@ -326,6 +336,7 @@ END GROUP
  *(.comment)
  .comment       0x0000000000000000       0x30 main.o
                                          0x31 (size before relaxing)
+ .comment       0x0000000000000030       0x31 GPIO.o
 
 .note.gnu.avr.deviceinfo
                 0x0000000000000000       0x40
@@ -347,41 +358,50 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x0000000000000000       0x20
+.debug_aranges  0x0000000000000000       0x40
  *(.debug_aranges)
  .debug_aranges
                 0x0000000000000000       0x20 main.o
+ .debug_aranges
+                0x0000000000000020       0x20 GPIO.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x0000000000000000      0x70a
+.debug_info     0x0000000000000000      0xa38
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x0000000000000000      0x5f4 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/crtatmega328p.o
- .debug_info    0x00000000000005f4      0x116 main.o
+ .debug_info    0x00000000000005f4      0x24a main.o
+ .debug_info    0x000000000000083e      0x1fa GPIO.o
 
-.debug_abbrev   0x0000000000000000      0x667
+.debug_abbrev   0x0000000000000000      0x749
  *(.debug_abbrev)
  .debug_abbrev  0x0000000000000000      0x5a2 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/crtatmega328p.o
- .debug_abbrev  0x00000000000005a2       0xc5 main.o
+ .debug_abbrev  0x00000000000005a2       0xff main.o
+ .debug_abbrev  0x00000000000006a1       0xa8 GPIO.o
 
-.debug_line     0x0000000000000000      0x117
+.debug_line     0x0000000000000000      0x202
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x0000000000000000       0x1a /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/crtatmega328p.o
- .debug_line    0x000000000000001a       0xfd main.o
+ .debug_line    0x000000000000001a      0x104 main.o
+ .debug_line    0x000000000000011e       0xe4 GPIO.o
 
-.debug_frame    0x0000000000000000       0x24
+.debug_frame    0x0000000000000000       0x98
  *(.debug_frame)
  .debug_frame   0x0000000000000000       0x24 main.o
+ .debug_frame   0x0000000000000024       0x74 GPIO.o
 
-.debug_str      0x0000000000000000      0x32b
+.debug_str      0x0000000000000000      0x3ca
  *(.debug_str)
  .debug_str     0x0000000000000000      0x208 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/crtatmega328p.o
- .debug_str     0x0000000000000208      0x123 main.o
-                                        0x157 (size before relaxing)
+ .debug_str     0x0000000000000208      0x167 main.o
+                                        0x19b (size before relaxing)
+ .debug_str     0x000000000000036f       0x5b GPIO.o
+                                        0x19f (size before relaxing)
 
-.debug_loc
+.debug_loc      0x0000000000000000       0xa0
  *(.debug_loc)
+ .debug_loc     0x0000000000000000       0xa0 GPIO.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -413,6 +433,17 @@ LOAD linker stubs
 Cross Reference Table
 
 Symbol                                            File
+GPIO_config_input_nopull                          GPIO.o
+GPIO_config_input_pullup                          GPIO.o
+                                                  main.o
+GPIO_config_output                                GPIO.o
+                                                  main.o
+GPIO_read                                         GPIO.o
+                                                  main.o
+GPIO_toggle                                       GPIO.o
+                                                  main.o
+GPIO_write                                        GPIO.o
+                                                  main.o
 __FUSE_REGION_LENGTH__                            /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/crtatmega328p.o
 __bad_interrupt                                   /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/crtatmega328p.o
 __heap_end                                        /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/crtatmega328p.o
