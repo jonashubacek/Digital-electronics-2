@@ -2,7 +2,8 @@
 #define GPIO_H_INCLUDED
 
 #include <avr/io.h>
-
+#define PIN_LOW 0
+#define PIN_HIGH 1
 /*
  * Configures given GPIO pin to output mode. 
  * @param reg_name DD registry address

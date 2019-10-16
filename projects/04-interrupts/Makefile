@@ -15,13 +15,12 @@ LIBRARY_DIR = ../library
 # The result of wildcard is a space-separated list of the names of
 # existing files that match the pattern.
 SRCS := $(wildcard *.c)
-SRCS += $(LIBRARY_DIR)/src/GPIO.c
 # Add or comment libraries you are using in the project
 #SRCS += $(LIBRARY_DIR)/src/lcd.c
 #SRCS += $(LIBRARY_DIR)/src/uart.c
 #SRCS += $(LIBRARY_DIR)/src/twi.c
-SRCS += $(LIBRARY_DIR)/src/.c
-SRCS += $(LIBRARY_DIR)/src/gpio.c
+SRCS += $(LIBRARY_DIR)/src/GPIO.c
+SRCS += $(LIBRARY_DIR)/src/timer.c
 ASSRC := $(wildcard *.S)
 
 
